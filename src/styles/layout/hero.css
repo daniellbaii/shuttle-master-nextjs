@@ -1,0 +1,43 @@
+/* Hero Section Layout */
+
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content-left {
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    max-width: 600px;
+}
+
+.hero-content-left h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: white;
+}
+
+.hero-content-left p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: var(--section-padding) 0;
+    background: var(--bg-primary);
+}

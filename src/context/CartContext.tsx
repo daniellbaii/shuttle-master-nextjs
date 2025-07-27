@@ -1,18 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-
-export interface Product {
-  id: string;
-  title: string;
-  category: string;
-  price: number;
-  originalPrice?: number;
-}
-
-interface CartItem extends Product {
-  quantity: number;
-}
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import { Product, CartItem, NotificationType } from '@/types';
 
 interface CartContextType {
   cart: CartItem[];
@@ -72,7 +61,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  const showNotification = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
+  const showNotification = (message: string, type: NotificationType = 'info') => {
     // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
@@ -122,8 +111,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
-  const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+  const cartTotal = useMemo(() => 
+    cart.reduce((total, item) => total + (item.price * item.quantity), 0),
+    [cart]
+  );
+  
+  const cartCount = useMemo(() => 
+    cart.reduce((count, item) => count + item.quantity, 0),
+    [cart]
+  );
 
   return (
     <CartContext.Provider value={{

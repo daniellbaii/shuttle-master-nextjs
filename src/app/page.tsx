@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Card, Button } from '@/components/ui';
 
 export default function Home() {
   return (
@@ -25,7 +26,9 @@ export default function Home() {
             <h2>Training Programs & Courses</h2>
             <p className="services-subtitle">Purchase downloadable resources, training guides, and exclusive course access to take your badminton to the next level.</p>
           </div>
-          <div className="coming-soon">Shop feature coming soon.</div>
+          <div className="coming-soon">
+            <Link href="/shop" className="btn-primary">View All Programs</Link>
+          </div>
         </div>
       </section>
 
@@ -37,7 +40,9 @@ export default function Home() {
             <h2>Badminton Insights & Tips</h2>
             <p className="services-subtitle">Read expert advice, training articles, and strategy breakdowns to stay sharp on and off the court.</p>
           </div>
-          <div className="coming-soon">Articles will be published here soon.</div>
+          <div className="coming-soon">
+            <Link href="/articles" className="btn-primary">Read Articles</Link>
+          </div>
         </div>
       </section>
 
@@ -50,26 +55,30 @@ export default function Home() {
             <p className="services-subtitle">Have questions? Ready to start your badminton journey? We&apos;re here to help.</p>
           </div>
           <div className="grid-auto-fit grid-spacing">
-            <div className="card">
-              <div className="card-icon">📧</div>
-              <h3 className="card-title">Email</h3>
-              <p className="card-subtitle">Get in touch for bookings and questions</p>
-              <p className="card-link">coach@shuttlemaster.com</p>
-            </div>
+            <Card
+              icon="📧"
+              title="Email"
+              subtitle="Get in touch for bookings and questions"
+              link="coach@shuttlemaster.com"
+            />
 
-            <a href="https://wa.me/61403429308" className="card card-link-wrapper" target="_blank" rel="noopener noreferrer">
-              <div className="card-icon">📱</div>
-              <h3 className="card-title">Phone</h3>
-              <p className="card-subtitle">Call or text us on WhatsApp for quick responses</p>
-              <p className="card-link">+61 403 429 308</p>
-            </a>
+            <Card
+              icon="📱"
+              title="Phone"
+              subtitle="Call or text us on WhatsApp for quick responses"
+              link="+61 403 429 308"
+              href="https://wa.me/61403429308"
+              target="_blank"
+            />
 
-            <a href="https://www.google.com/maps?q=Perth+Badminton+Arena" className="card card-link-wrapper" target="_blank" rel="noopener noreferrer">
-              <div className="card-icon">📍</div>
-              <h3 className="card-title">Location</h3>
-              <p className="card-subtitle">Training sessions held at</p>
-              <p className="card-link">Perth Badminton Arena</p>
-            </a>
+            <Card
+              icon="📍"
+              title="Location"
+              subtitle="Training sessions held at"
+              link="Perth Badminton Arena"
+              href="https://www.google.com/maps?q=Perth+Badminton+Arena"
+              target="_blank"
+            />
           </div>
         </div>
       </section>

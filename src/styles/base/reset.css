@@ -1,0 +1,35 @@
+/* CSS Reset & Base Styles */
+
+* {
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: var(--line-height-base);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    font-size: var(--font-size-base);
+}
+
+/* Common Layout Classes */
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.section-padding { 
+    padding: var(--section-padding) 0; 
+}
+
+.text-center { 
+    text-align: center; 
+}
+
+.bg-secondary { 
+    background: var(--bg-secondary); 
+}

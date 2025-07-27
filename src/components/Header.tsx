@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
+import Navigation from './Navigation';
 import { useCart } from '@/context/CartContext';
-import CartModal from './CartModal';
+
+const CartModal = lazy(() => import('./CartModal'));
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { cartCount, openCart } = useCart();
+  const { isCartOpen } = useCart();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -31,19 +33,10 @@ export default function Header() {
             <span>Shuttle Master</span>
           </Link>
           
-          <ul className="nav-links">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/shop">Shop</Link></li>
-            <li><Link href="/articles">Articles</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-            <li>
-              <button className="cart-btn" onClick={openCart}>
-                🛒 <span className="cart-count">{cartCount}</span>
-              </button>
-            </li>
-          </ul>
+          {/* Desktop Navigation */}
+          <Navigation />
 
+          {/* Mobile Menu Toggle */}
           <button 
             className={`nav-toggle ${isMobileMenuOpen ? 'active' : ''}`}
             onClick={toggleMobileMenu}
@@ -52,24 +45,18 @@ export default function Header() {
             &#9776;
           </button>
 
+          {/* Mobile Navigation */}
           {isMobileMenuOpen && (
-            <ul className="mobile-nav show">
-              <li><Link href="/" onClick={closeMobileMenu}>Home</Link></li>
-              <li><Link href="/about" onClick={closeMobileMenu}>About Us</Link></li>
-              <li><Link href="/shop" onClick={closeMobileMenu}>Shop</Link></li>
-              <li><Link href="/articles" onClick={closeMobileMenu}>Articles</Link></li>
-              <li><Link href="/contact" onClick={closeMobileMenu}>Contact</Link></li>
-              <li>
-                <button className="cart-btn" onClick={() => { openCart(); closeMobileMenu(); }}>
-                  🛒 <span className="cart-count">{cartCount}</span>
-                </button>
-              </li>
-            </ul>
+            <Navigation isMobile={true} onItemClick={closeMobileMenu} />
           )}
         </nav>
       </header>
       
-      <CartModal />
+      {isCartOpen && (
+        <Suspense fallback={null}>
+          <CartModal />
+        </Suspense>
+      )}
     </>
   );
 }
