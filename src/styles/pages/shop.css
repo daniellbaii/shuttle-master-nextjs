@@ -33,6 +33,8 @@
     color: white;
     font-size: 3.5rem;
     position: relative;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .product-badge {

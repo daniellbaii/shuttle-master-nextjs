@@ -72,9 +72,6 @@ export default function CartModal() {
           {cart.length === 0 ? (
             <div className="cart-empty">
               <p>No products in the basket.</p>
-              <button className="btn-secondary" onClick={closeCart}>
-                Continue Shopping
-              </button>
             </div>
           ) : (
             <div className="cart-items">
@@ -111,9 +108,6 @@ export default function CartModal() {
               <strong>Total: ${cartTotal}</strong>
             </div>
             <div className="cart-actions">
-              <button className="btn-secondary" onClick={closeCart}>
-                Continue Shopping
-              </button>
               <button className="btn-primary" onClick={handleCheckout}>
                 Proceed to Checkout
               </button>

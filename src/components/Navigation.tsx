@@ -6,11 +6,15 @@ import { NAVIGATION_ITEMS } from '@/constants/navigation';
 interface NavigationProps {
   isMobile?: boolean;
   onItemClick?: () => void;
+  id?: string;
+  showCartButton?: boolean;
 }
 
 const Navigation: React.FC<NavigationProps> = React.memo(({ 
   isMobile = false, 
-  onItemClick 
+  onItemClick,
+  id,
+  showCartButton = true
 }) => {
   const { cartCount, openCart } = useCart();
 
@@ -26,7 +30,7 @@ const Navigation: React.FC<NavigationProps> = React.memo(({
   const navClass = isMobile ? 'mobile-nav show' : 'nav-links';
 
   return (
-    <ul className={navClass}>
+    <ul className={navClass} id={id}>
       {NAVIGATION_ITEMS.map((item) => (
         <li key={item.href}>
           <Link href={item.href} onClick={handleLinkClick}>
@@ -34,11 +38,17 @@ const Navigation: React.FC<NavigationProps> = React.memo(({
           </Link>
         </li>
       ))}
-      <li>
-        <button className="cart-btn" onClick={handleCartClick}>
-          🛒 <span className="cart-count">{cartCount}</span>
-        </button>
-      </li>
+      {showCartButton && (
+        <li>
+          <button 
+            className="cart-btn" 
+            onClick={handleCartClick}
+            aria-label={`Shopping cart with ${cartCount} items`}
+          >
+            🛒 <span className="cart-count">{cartCount}</span>
+          </button>
+        </li>
+      )}
     </ul>
   );
 });

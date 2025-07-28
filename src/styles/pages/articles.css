@@ -31,6 +31,8 @@
     color: white;
     font-size: 3rem;
     position: relative;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .article-card-content {
