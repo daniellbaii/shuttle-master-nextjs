@@ -1,7 +1,13 @@
+'use client';
+
 import Link from 'next/link';
-import { Card, Button } from '@/components/ui';
+import { Card, Button, ArticleCard, ProductCard } from '@/components/ui';
+import { useCart } from '@/context/CartContext';
+import { ARTICLES } from '@/data/articles';
+import { PRODUCTS } from '@/data/products';
 
 export default function Home() {
+  const { addToCart } = useCart();
   return (
     <>
       {/* Hero Section */}
@@ -26,6 +32,17 @@ export default function Home() {
             <h2>Training Programs & Courses</h2>
             <p className="services-subtitle">Purchase downloadable resources, training guides, and exclusive course access to take your badminton to the next level.</p>
           </div>
+          
+          <div className="shop-grid">
+            {PRODUCTS.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={addToCart}
+              />
+            ))}
+          </div>
+          
           <div className="coming-soon">
             <Link href="/shop" className="btn-primary">View All Programs</Link>
           </div>
@@ -40,6 +57,13 @@ export default function Home() {
             <h2>Badminton Insights & Tips</h2>
             <p className="services-subtitle">Read expert advice, training articles, and strategy breakdowns to stay sharp on and off the court.</p>
           </div>
+          
+          <div className="articles-grid">
+            {ARTICLES.map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+          
           <div className="coming-soon">
             <Link href="/articles" className="btn-primary">Read Articles</Link>
           </div>
